@@ -1,264 +1,656 @@
- /* body{
-    background-color: gold
-    ;
-}
-
-h1 {
-    color: black;
-}
-
-p {
-    font-size:20px; color:softer blue; */
-
-    /* :root represents the highest-level html element.
-   It stores reusable CSS variables for the whole Services page.
-   Students must replace these example colours with their actual colours. */
+ /* ==========================================
+   1. ROOT VARIABLES & GLOBAL DESIGN SYSTEM
+   ========================================== */
 :root {
-    --primary: #2563EB; /* Store the website's main colour. */
-    --primary-dark: #1E3A8A; /* Store a darker version for strong backgrounds. */
-    --accent: #000000; /* Store the highlight and hover colour. */
-    --background: #F5F7FA; 
-    /* Store the page background colour. */
-    --surface: #FFFFFF; /* Store the card background colour. */
-    --text: #1F2937; /* Store the normal text colour. */
-    --border: #D1D5DB; /* Store the card border colour. */
+    --primary: #2563EB;
+    --primary-dark: #1E3A8A;
+    --accent: #0F172A;
+    --background: #F8FAFC;
+    --surface: #FFFFFF;
+    --text: #1E293B;
+    --text-muted: #64748B;
+    --border: #E2E8F0;
+    --nav-bg: #0B0F19;
+    --danger: #E50914;
 }
 
-/* Select every HTML element. */
 * {
-    box-sizing: border-box; /* Include padding and borders inside element widths. */
+    box-sizing: border-box;
 }
 
-/* Style the complete visible webpage. */
 body {
-    margin: 0; /* Remove the browser's default outside spacing. */
-    background-color: var(--background); /* Use the stored background colour. */
-    color: var(--text); /* Use the stored normal text colour. */
-    font-family: Arial, Helvetica, sans-serif; /* Set readable fallback fonts. */
-    font-size: 16px; /* Set the default text size. */
-    line-height: 1.6; /* Add readable space between lines. */
+    margin: 0;
+    background-color: var(--background);
+    color: var(--text);
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
 }
 
-/* Create a reusable centred content area. */
 .container {
-    width: min(90%, 1200px); /* Use 90% width but never exceed 1200px. */
-    margin-inline: auto; /* Centre the container horizontally. */
+    width: min(90%, 1200px);
+    margin-inline: auto;
 }
 
-/* Remove normal underlines and animate link colour changes. */
 a {
-    text-decoration: none; /* Remove the browser's default underline. */
-    transition: 0.25s ease; /* Smoothly animate interaction changes. */
+    text-decoration: none;
+    transition: color 0.25s ease;
 }
-
-/* Style the header across the top of the Services page. */
-.site-header {
-    background-color: var(--primary); /* Use the main website colour. */
-    border-bottom: 4px solid var(--accent); /* Add an accent line. */
-}
-
-/* Arrange the brand and navigation in one row. */
-.header-inner {
-    display: flex; /* Place children next to each other. */
-    align-items: center; /* Align children vertically. */
-    justify-content: space-between; /* Push them to opposite sides. */
-    min-height: 80px; /* Give the header a useful minimum height. */
-    gap: 2rem; /* Add space between the brand and navigation. */
-}
-
-/* Style the clickable organisation name. */
-.brand {
-    color: #fffdfd; /* Display the brand in white. */
-    font-size: 1.25rem; /* Make it larger than normal text. */
-    font-weight: bold; /* Emphasise the organisation name. */
-}
-
-/* Arrange the main navigation links. */
-.site-nav {
-    display: flex; /* Place links in one row. */
-    gap: 0.35rem; /* Add a small gap between links. */
-}
-
-/* Style each link inside the main navigation. */
-.site-nav a {
-    padding: 0.7rem 0.9rem; /* Add clickable space inside each link. */
-    border-radius: 6px; /* Round the link corners. */
-    color: #ffffff; /* Display normal navigation text in white. */
-    font-weight: bold; /* Make navigation labels easy to identify. */
-}
-
-/* Apply when a mouse pointer is over a navigation link. */
-.site-nav a:hover {
-    background-color: var(--accent); /* Change to the accent background. */
-    color: var(--primary-dark); /* Use dark text for contrast. */
-    transform: translateY(-2px); /* Move the link slightly upward. */
-}
-
-/* Apply when a keyboard user selects a navigation link. */
-.site-nav a:focus-visible {
-    outline: 3px solid #ffffff; /* Draw a visible keyboard focus outline. */
-    outline-offset: 2px; /* Add space around the outline. */
-}
-
-/* Highlight the link for the page currently open. */
-.site-nav a[aria-current="page"] {
-    background-color: #ffffff; /* Use a white active-link background. */
-    color: var(--primary); /* Use the main colour for active-link text. */
-}
-
-/* Style the short introduction at the top of the page. */
-.page-header {
-    padding: 4rem 0; /* Add vertical space inside the section. */
-    background-color: var(--primary-dark); /* Use the dark website colour. */
-    color: #ffffff; /* Make inherited text white. */
-    text-align: center; /* Centre the introduction. */
-}
-
-/* Style the small line above the main heading. */
-.eyebrow {
-    margin-bottom: 0.5rem; /* Add space below the line. */
-    color: var(--accent); /* Use the accent colour. */
-    font-weight: bold; /* Emphasise the text. */
-    text-transform: uppercase; /* Display the text in capital letters. */
-}
-
-/* Style the main Services heading. */
-.page-header h1 {
-    margin: 0 0 1rem; /* Remove top space and add bottom space. */
-    font-size: clamp(2rem, 5vw, 3.25rem); /* Make the size responsive. */
-}
-
-/* Keep the introductory paragraph readable and centred. */
-.page-introduction {
-    max-width: 700px; /* Stop the paragraph from becoming too wide. */
-    margin: 0 auto; /* Centre the paragraph. */
-}
-
-/* Add space around the main Services content. */
-.services-section {
-    padding: 4rem 0; /* Add vertical section spacing. */
-}
-
-/* Style the heading above the cards. */
-.section-heading {
-    margin: 0 0 2rem; /* Add space below the heading. */
-    color: var(--primary); /* Use the main website colour. */
-    text-align: center; /* Centre the heading. */
-}
-
-/* Arrange four cards in a responsive grid. */
-.services-grid {
-    display: grid; /* Turn this container into CSS Grid. */
-    grid-template-columns: repeat(4, 1fr); /* Create four equal columns. */
-    gap: 1.5rem; /* Add space between cards. */
-}
-
-/* Style every repeated service card. */
-.service-card {
-    overflow: hidden; /* Keep the image inside the rounded corners. */
-    background-color: var(--surface); /* Use the stored card colour. */
-    border: 1px solid var(--border); /* Add a light card border. */
-    border-radius: 10px; /* Round the card corners. */
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.12); /* Add depth. */
-    transition: transform 0.25s ease; /* Animate the card hover movement. */
-}
-
-/* Apply while the mouse is over a service card. */
-.service-card:hover {
-    transform: translateY(-5px); /* Lift the card slightly upward. */
-}
-
-/* Give every service image the same size. */
-.service-image {
-    display: block; /* Remove the inline gap below an image. */
-    width: 100%; /* Fill the complete card width. */
-    height: 180px; /* Give all four images equal height. */
-    object-fit: cover; /* Crop images without stretching them. */
-}
-
-/* Add internal spacing around each card's text. */
-.service-content {
-    padding: 1.25rem; /* Add space between text and card edges. */
-}
-
-/* Style each service name. */
-.service-content h3 {
-    margin: 0 0 0.5rem; /* Remove top space and add bottom space. */
-    color: var(--primary); /* Use the main website colour. */
-}
-
-/* Remove unnecessary space below each service description. */
-.service-content p {
-    margin-bottom: 0; /* Remove the final paragraph's bottom margin. */
-}
-
-/* Style the footer at the bottom of the Services page. */
-.site-footer {
-    padding: 2rem 0; /* Add internal footer spacing. */
-    background-color: var(--primary-dark); /* Use the dark website colour. */
-    color: #000000; /* Display footer text in white. */
-    text-align: center; /* Centre the footer text. */
-
-}
-
-/* Remove the paragraph's default footer margin. */
-.site-footer p {
-    margin: 0; /* Remove unwanted space around the copyright. */
-    
-}
-
-/* Tablet rules apply when the screen is 900px or narrower. */
-@media (max-width: 900px) {
-    /* Stack the brand above the navigation on tablets. */
-    .header-inner {
-        flex-direction: column; /* Change the header from a row to a column. */
-        padding: 1rem 0; /* Add space inside the stacked header. */
-    }
-
-    /* Allow tablet navigation links to move onto another line. */
-    .site-nav {
-        justify-content: center; /* Centre the links. */
-        flex-wrap: wrap; /* Wrap links when space is limited. */
-    }
-
-    /* Change the four service cards into two columns. */
-    .services-grid {
-        grid-template-columns: repeat(2, 1fr); /* Display two equal columns. */
-    }
-}
-
-/* Phone rules apply when the screen is 600px or narrower. */
-@media (max-width: 600px) {
-    /* Stack the navigation links vertically. */
-    .site-nav {
-        width: 100%; /* Fill the available phone width. */
-        flex-direction: column; /* Place links below one another. */
-    }
-
-    /* Make every phone navigation link easy to tap. */
-    .site-nav a {
-        width: 100%; /* Make each link fill the navigation width. */
-        text-align: center; /* Centre each link label. */
-    }
-
-    /* Display one service card per row on phones. */
-    .services-grid {
-        grid-template-columns: 1fr; /* Change the grid to one column. */
-    }
-}
-
 
 /* ==========================================
-   SISONKE AUTO CARE - MODERN PROFESSIONAL FOOTER
+   2. HEADER & CLEAN NAVIGATION BAR
    ========================================== */
+.site-header {
+    background-color: var(--nav-bg);
+    border-bottom: 4px solid var(--danger);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
 
+.header-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 15px 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 80px;
+    gap: 2rem;
+}
+
+.brand {
+    color: #FFFFFF;
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+
+.brand img {
+    width: 180px;
+    height: auto;
+    display: block;
+}
+
+.site-nav {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.site-nav a {
+    color: #F1F5F9;
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 600;
+    padding: 0;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    transform: none !important;
+    transition: color 0.3s ease;
+}
+
+.site-nav a:hover {
+    color: var(--danger);
+    background: transparent !important;
+}
+
+.site-nav a:focus-visible {
+    outline: 2px solid #FFFFFF;
+    outline-offset: 4px;
+}
+
+.site-nav a[aria-current="page"] {
+    color: var(--danger);
+    background: transparent !important;
+}
+
+/* ==========================================
+   3. HERO & PAGE HEADERS
+   ========================================== */
+.page-header {
+    padding: 5rem 0;
+    background: linear-gradient(135deg, #0F172A 0%, #1E3A8A 100%);
+    color: #FFFFFF;
+    text-align: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.eyebrow {
+    margin-bottom: 0.5rem;
+    color: #60A5FA;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-size: 14px;
+}
+
+.page-header h1 {
+    margin: 0 0 1rem;
+    font-size: clamp(2rem, 5vw, 3rem);
+    color: #FFFFFF;
+}
+
+.page-introduction {
+    max-width: 700px;
+    margin: 0 auto;
+    color: #94A3B8;
+}
+
+.hero {
+    min-height: 520px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background: linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.85)), #111827;
+    padding: 80px 20px;
+}
+
+.hero-content {
+    max-width: 800px;
+}
+
+.hero h1 {
+    color: #FFFFFF;
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    line-height: 1.2;
+    margin-bottom: 20px;
+    font-weight: 800;
+}
+
+.hero p {
+    color: #CBD5E1;
+    font-size: 18px;
+    line-height: 1.7;
+    margin-bottom: 35px;
+}
+
+/* ==========================================
+   4. BUTTONS & ACTIONS
+   ========================================== */
+.hero-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.button {
+    display: inline-block;
+    padding: 14px 28px;
+    background: var(--primary);
+    color: #FFFFFF;
+    text-decoration: none;
+    font-weight: 600;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
+}
+
+.button:hover {
+    background: #1D4ED8;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(37, 99, 235, 0.35);
+}
+
+.secondary-button {
+    background: transparent;
+    color: #FFFFFF;
+    border: 2px solid rgba(255, 255, 255, 0.8);
+    box-shadow: none;
+}
+
+.secondary-button:hover {
+    background: #FFFFFF;
+    color: var(--primary-dark);
+    border-color: #FFFFFF;
+}
+
+/* ==========================================
+   5. SERVICES, CARDS & SECTIONS
+   ========================================== */
+.services-section,
+.services-preview {
+    padding: 80px 0;
+    background-color: var(--background);
+}
+
+.services-preview {
+    background-color: #FFFFFF;
+}
+
+.section-heading {
+    margin: 0 0 3rem;
+    color: var(--primary-dark);
+    text-align: center;
+    font-size: 32px;
+    font-weight: 700;
+}
+
+.services-grid,
+.cards {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 25px;
+}
+
+.cards {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.service-card,
+.card,
+.benefit {
+    background-color: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.service-card:hover,
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px -3px rgba(0, 0, 0, 0.08);
+}
+
+.service-image {
+    display: block;
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+}
+
+.service-content,
+.card,
+.benefit {
+    padding: 30px;
+}
+
+.service-content h3,
+.card h3,
+.benefit h3 {
+    margin: 0 0 12px;
+    color: var(--primary);
+    font-size: 20px;
+}
+
+.service-content p,
+.card p,
+.benefit p {
+    color: var(--text-muted);
+    line-height: 1.7;
+    margin-bottom: 0;
+}
+
+.card-icon,
+.benefit-icon {
+    font-size: 40px;
+    margin-bottom: 15px;
+}
+
+.benefit-icon {
+    width: 50px;
+    height: 50px;
+    margin: 0 auto 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--primary);
+    color: #FFFFFF;
+    border-radius: 50%;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.why-us {
+    padding: 80px 0;
+    background-color: var(--background);
+    text-align: center;
+}
+
+.benefits {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
+
+.benefit {
+    background: #FFFFFF;
+    text-align: center;
+}
+
+/* ==========================================
+   6. ABOUT SECTIONS
+   ========================================== */
+.about-section {
+    max-width: 1100px;
+    margin: 80px auto;
+    padding: 0 25px;
+}
+
+.about-intro {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.about-intro h1 {
+    font-size: 40px;
+    margin-bottom: 15px;
+    color: var(--primary-dark);
+}
+
+.about-intro p {
+    max-width: 750px;
+    margin: 0 auto;
+    font-size: 18px;
+    line-height: 1.8;
+    color: var(--text-muted);
+}
+
+.about-card {
+    background: #FFFFFF;
+    padding: 35px;
+    margin-bottom: 25px;
+    border-left: 5px solid var(--primary);
+    border-radius: 8px;
+    border-top: 1px solid var(--border);
+    border-right: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+}
+
+.about-card h2 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-size: 24px;
+    color: var(--primary-dark);
+}
+
+.about-card p {
+    margin: 0 0 15px;
+    font-size: 16px;
+    line-height: 1.8;
+    color: var(--text-muted);
+}
+
+.about-card p:last-child {
+    margin-bottom: 0;
+}
+
+/* ==========================================
+   7. CONTACT SECTION (SIDE-BY-SIDE HARMONIZED)
+   ========================================== */
+.contact-section,
+.form-section {
+    background: linear-gradient(135deg, #0F172A 0%, #1E3A8A 100%);
+    width: 100%;
+    min-height: 85vh;
+    padding: 80px 20px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.contact-container,
+.form-container {
+    width: 100%;
+    max-width: 1200px;
+    background-color: #0F172A;
+    border: 1px solid rgba(96, 165, 250, 0.2);
+    border-top: 4px solid var(--primary);
+    border-radius: 12px;
+    padding: 50px;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
+    box-sizing: border-box;
+    
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: start;
+}
+
+.contact-container > .contact-header,
+.form-container > .contact-header {
+    grid-column: 1 / -1;
+}
+
+.contact-header {
+    text-align: center;
+    margin-bottom: 10px;
+    width: 100%;
+}
+
+.contact-header h1 {
+    color: #FFFFFF;
+    font-size: 32px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin: 0 0 10px 0;
+}
+
+.contact-header p {
+    color: #94A3B8;
+    font-size: 15px;
+    margin: 0;
+}
+
+.contact-info {
+    background: #1E293B;
+    padding: 35px;
+    border-radius: 10px;
+    border-left: 5px solid var(--primary);
+    color: #FFFFFF !important;
+    height: 100%;
+    box-sizing: border-box;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    border-right: 1px solid rgba(255, 255, 255, 0.05);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.contact-info p,
+.contact-info span,
+.contact-info li,
+.contact-info div {
+    color: #CBD5E1 !important;
+}
+
+.contact-info h2,
+.contact-form h2 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    color: #60A5FA !important;
+    font-size: 22px;
+}
+
+.contact-details {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.contact-details li {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 12px 0;
+    border-bottom: 1px solid #334155;
+    color: #CBD5E1 !important;
+}
+
+.contact-details li:last-child {
+    border-bottom: none;
+}
+
+.contact-details strong {
+    color: #60A5FA !important;
+    font-size: 14px;
+}
+
+.contact-details span {
+    color: #FFFFFF !important;
+    font-size: 14px;
+}
+
+.contact-form {
+    background: #1E293B;
+    padding: 35px;
+    border-radius: 10px;
+    border-left: 5px solid #60A5FA;
+    box-shadow: none;
+    width: 100%;
+    box-sizing: border-box;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    border-right: 1px solid rgba(255, 255, 255, 0.05);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.form-group label {
+    width: 100%;
+    color: #E2E8F0;
+    font-weight: 500;
+    font-size: 14px;
+    margin-bottom: 8px;
+}
+
+.form-group label::after {
+    display: none;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    background-color: #0F172A;
+    border: 1px solid #334155;
+    border-radius: 6px;
+    padding: 12px 16px;
+    color: #FFFFFF;
+    font-size: 14px;
+    font-family: inherit;
+    box-sizing: border-box;
+    transition: all 0.3s ease;
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+    color: #64748B;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: #60A5FA;
+    background-color: #0b1120;
+    box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.2);
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 110px;
+}
+
+.form-text {
+    display: block;
+    margin-top: 5px;
+    font-size: 12px;
+    color: #94A3B8;
+}
+
+.form-group-checkbox {
+    margin: 15px 0;
+    color: #CBD5E1;
+    font-size: 13px;
+}
+
+.form-group-checkbox label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    width: auto;
+}
+
+.form-group-checkbox input[type="checkbox"] {
+    accent-color: var(--primary);
+    width: 16px;
+    height: 16px;
+}
+
+.contact-form button,
+.submit-btn {
+    display: block;
+    width: 100%;
+    margin-top: 15px;
+    padding: 14px 24px;
+    border: none;
+    border-radius: 6px;
+    background: var(--primary);
+    color: #FFFFFF;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+}
+
+.contact-form button:hover,
+.submit-btn:hover {
+    background: #1D4ED8;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(37, 99, 235, 0.4);
+}
+
+/* ==========================================
+   8. CALL TO ACTION (CTA)
+   ========================================= */
+.cta {
+    padding: 80px 20px;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+    text-align: center;
+    color: #FFFFFF;
+}
+
+.cta h2 {
+    color: #FFFFFF;
+    font-size: 32px;
+    margin-bottom: 15px;
+    font-weight: 700;
+}
+
+.cta p {
+    max-width: 700px;
+    margin: 0 auto 30px;
+    color: #E2E8F0;
+    line-height: 1.7;
+}
+
+/* ==========================================
+   9. UNIFIED GLOBAL FOOTER
+   ========================================= */
 .site-footer {
     background: linear-gradient(135deg, #0F172A 0%, #1E3A8A 100%);
     color: #FFFFFF;
-    padding: 60px 20px 25px;
-    margin-top: 60px;
-    border-top: 4px solid #2563EB; /* Premium brand accent line */
+    padding: 70px 20px 25px;
+    border-top: 4px solid var(--primary);
     box-shadow: inset 0 10px 20px rgba(0, 0, 0, 0.2);
+    text-align: left;
 }
 
 .footer-content {
@@ -271,17 +663,11 @@ a {
 
 .footer-section {
     flex: 1;
-    transition: transform 0.3s ease;
-}
-
-/* Subtle hover pop effect on individual columns */
-.footer-section:hover {
-    transform: translateY(-3px);
 }
 
 .footer-section h3 {
     color: #FFFFFF;
-    font-size: 18px;
+    font-size: 17px;
     font-weight: 700;
     margin-bottom: 20px;
     text-transform: uppercase;
@@ -290,7 +676,6 @@ a {
     padding-bottom: 8px;
 }
 
-/* Elegant underline accent for headings */
 .footer-section h3::after {
     content: '';
     position: absolute;
@@ -308,9 +693,6 @@ a {
     margin: 0;
     font-size: 14px;
 }
-
-
-/* Quick Links & Lists */
 
 .footer-links,
 .footer-list {
@@ -332,41 +714,13 @@ a {
     color: #CBD5E1;
     text-decoration: none;
     font-size: 14px;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: color 0.3s ease;
 }
 
-/* Icon Styling with Soft Background Glow Container */
-.footer-links a i,
-.footer-list i {
-    width: 32px;
-    height: 32px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: rgba(30, 41, 59, 0.8);
-    border: 1px solid rgba(96, 165, 250, 0.2);
-    border-radius: 6px;
-    color: #60A5FA;
-    font-size: 14px;
-    transition: all 0.3s ease;
-}
-
-/* Interactive Hover States */
 .footer-links a:hover {
     color: #FFFFFF;
-    padding-left: 6px; /* Smooth slide-to-the-right animation */
+    padding-left: 4px;
 }
-
-.footer-links a:hover i,
-.footer-list li:hover i {
-    background-color: #2563EB;
-    color: #FFFFFF;
-    border-color: #2563EB;
-    box-shadow: 0 0 10px rgba(37, 99, 235, 0.4);
-}
-
-
-/* Copyright Section */
 
 .footer-bottom {
     max-width: 1150px;
@@ -383,844 +737,56 @@ a {
     letter-spacing: 0.5px;
 }
 
-
-/* Mobile Responsiveness */
-
-@media (max-width: 768px) {
-    .site-footer {
-        padding: 40px 15px 20px;
+/* ==========================================
+   10. MEDIA QUERIES (RESPONSIVE ADAPTATION)
+   ========================================== */
+@media (max-width: 992px) {
+    .services-grid {
+        grid-template-columns: repeat(2, 1fr);
     }
-
-    .footer-content {
-        flex-direction: column;
-        gap: 35px;
-    }
-
-    .footer-section {
-        width: 100%;
-    }
-
-    .footer-section:hover {
-        transform: none; /* Disable lift on small touch screens */
+    
+    .cards, .benefits {
+        grid-template-columns: repeat(2, 1fr);
     }
 }
-/* Header */
-.site-header {
-    background-color: #0b0b0b;
-    padding: 10px 0;
-    border-bottom: 2px solid #e50914;
-}
 
-/* Header container */
-.header-inner {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 30px;
-
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-/* Logo */
-.brand img {
-    width: 180px;
-    height: auto;
-    display: block;
-}
-
-/* Navigation */
-.site-nav {
-    display: flex;
-    align-items: center;
-    gap: 30px;
-}
-
-.site-nav a {
-    color: #ffffff;
-    text-decoration: none;
-    font-size: 16px;
-    font-weight: 600;
-    transition: 0.3s ease;
-}
-
-.site-nav a:hover {
-    color: #e50914;
-}
-
-/* Mobile */
-@media (max-width: 768px) {
+@media (max-width: 900px) {
     .header-inner {
         flex-direction: column;
-        gap: 15px;
-    }
-
-    .brand img {
-        width: 160px;
+        padding: 1rem 0;
+        gap: 1rem;
     }
 
     .site-nav {
-        gap: 15px;
-        flex-wrap: wrap;
         justify-content: center;
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+
+    .contact-container,
+    .form-container {
+        grid-template-columns: 1fr;
     }
 }
 
-/* About Us Section */
-.about-section {
-    max-width: 1100px;
-    margin: 60px auto;
-    padding: 0 25px;
-}
-
-/* Main heading section */
-.about-intro {
-    text-align: center;
-    margin-bottom: 45px;
-}
-
-.about-intro h1 {
-    font-size: 42px;
-    margin-bottom: 15px;
-    color: #021cff;
-}
-
-.about-intro p {
-    max-width: 750px;
-    margin: 0 auto;
-    font-size: 18px;
-    line-height: 1.8;
-    color: #555;
-}
-
-/* Individual sections */
-.about-card {
-    background: #f5f5f5;
-    padding: 30px;
-    margin-bottom: 25px;
-    border-left: 5px solid hwb(239 1% 0%);
-    border-radius: 8px;
-}
-
-.about-card h2 {
-    margin-top: 0;
-    margin-bottom: 15px;
-    font-size: 27px;
-    color: #0004fc;
-}
-
-.about-card p {
-    margin: 0 0 15px;
-    font-size: 16px;
-    line-height: 1.8;
-    color: #555;
-}
-
-.about-card p:last-child {
-    margin-bottom: 0;
-}
-
-/* Mobile responsiveness */
 @media (max-width: 768px) {
-
-    .about-section {
-        margin: 40px auto;
-        padding: 0 18px;
+    .cards,
+    .benefits,
+    .services-grid,
+    .footer-content {
+        grid-template-columns: 1fr;
     }
 
-    .about-intro h1 {
-        font-size: 34px;
-    }
-
-    .about-intro p {
-        font-size: 16px;
-    }
-
-    .about-card {
-        padding: 22px;
-    }
-
-    .about-card h2 {
-        font-size: 23px;
-    }
-
-    .about-card p {
-        font-size: 15px;
-    }
-}
-
-/* Contact Section */
-.contact-section {
-    max-width: 1100px;
-    margin: 60px auto;
-    padding: 0 25px;
-}
-
-/* Contact Heading */
-.contact-header {
-    text-align: center;
-    margin-bottom: 45px;
-}
-
-.contact-header h1 {
-    font-size: 42px;
-    color: #1807fd;
-    margin-bottom: 12px;
-}
-
-.contact-header p {
-    font-size: 18px;
-    color: #666;
-    margin: 0;
-}
-
-/* Main Contact Layout */
-.contact-container {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 35px;
-    align-items: stretch;
-}
-
-/* Contact Information */
-.contact-info {
-    background: #f5f5f5;
-    padding: 35px;
-    border-radius: 10px;
-    border-left: 5px solid #222;
-}
-
-.contact-info h2,
-.contact-form h2 {
-    margin-top: 0;
-    margin-bottom: 15px;
-    color: #0509fa;
-    font-size: 27px;
-}
-
-.contact-info > p {
-    color: #666;
-    line-height: 1.7;
-    margin-bottom: 25px;
-}
-
-/* Contact Details */
-.contact-details {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.contact-details li {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-    padding: 13px 0;
-    border-bottom: 1px solid #ddd;
-}
-
-.contact-details li:last-child {
-    border-bottom: none;
-}
-
-.contact-details strong {
-    color: #070bfc;
-    font-size: 15px;
-}
-
-.contact-details span {
-    color: #666;
-    font-size: 15px;
-}
-
-/* ==========================================
-   SISONKE AUTO CARE - FULL PAGE CONTACT STYLING
-   ========================================== */
-
-/* Full-width section stretching across the screen */
-.contact-section {
-    background: linear-gradient(135deg, #0F172A 0%, #1E3A8A 100%);
-    width: 100%;
-    min-height: 90vh;
-    padding: 80px 20px;
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-/* Centered professional container with comfortable width */
-.contact-container {
-    width: 100%;
-    max-width: 900px;
-    background-color: #0F172A;
-    border: 1px solid rgba(96, 165, 250, 0.2);
-    border-top: 4px solid #2563EB;
-    border-radius: 12px;
-    padding: 60px 50px;
-    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5), 0 0 25px rgba(37, 99, 235, 0.15);
-    box-sizing: border-box;
-}
-
-.contact-header {
-    text-align: center;
-    margin-bottom: 40px;
-    width: 100%;
-}
-
-.contact-header h1 {
-    color: #FFFFFF;
-    font-size: 32px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    margin: 0 0 10px 0;
-}
-
-/* Optional: If you have a subtitle/paragraph under the heading */
-.contact-header p {
-    color: #94A3B8;
-    font-size: 15px;
-    margin: 0;
-}
-
-.contact-form {
-    background: transparent;
-    padding: 0;
-    border-radius: 0;
-    box-shadow: none;
-    width: 100%;
-}
-
-.form-group {
-    display: flex;
-    align-items: center;
-    margin-bottom: 26px;
-    width: 100%;
-}
-
-.form-group label {
-    width: 200px;
-    color: #E2E8F0;
-    font-weight: 500;
-    font-size: 15px;
-    flex-shrink: 0;
-    margin-bottom: 0;
-}
-
-.form-group label::after {
-    content: ":";
-    float: right;
-    margin-right: 20px;
-    color: #60A5FA;
-    font-weight: bold;
-}
-
-.form-group input,
-.form-group textarea {
-    flex-grow: 1;
-    background-color: #1E293B;
-    border: 1px solid #334155;
-    border-radius: 6px;
-    padding: 14px 18px;
-    color: #FFFFFF;
-    font-size: 15px;
-    font-family: inherit;
-    box-sizing: border-box;
-    transition: all 0.3s ease;
-}
-
-.form-group input::placeholder,
-.form-group textarea::placeholder {
-    color: #64748B;
-}
-
-.form-group input:focus,
-.form-group textarea:focus {
-    outline: none;
-    border-color: #60A5FA;
-    background-color: #111827;
-    box-shadow: 0 0 0 4px rgba(96, 165, 250, 0.15);
-}
-
-.form-group textarea {
-    resize: vertical;
-    min-height: 140px;
-}
-
-.contact-form button {
-    display: block;
-    width: 240px;
-    margin-left: auto;
-    margin-top: 20px;
-    padding: 14px 24px;
-    border: none;
-    border-radius: 6px;
-    background: linear-gradient(135deg, #2563EB 0%, #1D4ED8 100%);
-    color: #FFFFFF;
-    font-size: 15px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
-}
-
-.contact-form button:hover {
-    background: linear-gradient(135deg, #1D4ED8 0%, #1E40AF 100%);
-    transform: translateY(-2px);
-    box-shadow: 0 6px 18px rgba(37, 99, 235, 0.4);
-}
-
-/* Mobile Responsiveness */
-@media (max-width: 768px) {
     .contact-section {
         padding: 40px 15px;
     }
 
-    .contact-container {
+    .contact-container,
+    .form-container {
         padding: 30px 20px;
     }
 
     .contact-header h1 {
         font-size: 24px;
-    }
-
-    .form-group {
-        flex-direction: column;
-        align-items: stretch;
-    }
-
-    .form-group label {
-        width: 100%;
-        margin-bottom: 8px;
-    }
-
-    .form-group label::after {
-        display: none;
-    }
-
-    .contact-form button {
-        width: 100%;
-        margin-left: 0;
-    }
-}
-
-/* ==============================
-   GENERAL CONTAINER
-============================== */
-
-.container {
-    width: 90%;
-    max-width: 1100px;
-    margin: 0 auto;
-}
-
-
-/* ==============================
-   HERO SECTION
-============================== */
-
-.hero {
-    min-height: 500px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    background: #222;
-    padding: 60px 20px;
-    box-sizing: border-box;
-}
-
-.hero-content {
-    max-width: 800px;
-}
-
-.hero h1 {
-    color: #fff;
-    font-size: 48px;
-    line-height: 1.2;
-    margin-bottom: 20px;
-}
-
-.hero p {
-    color: #ddd;
-    font-size: 18px;
-    line-height: 1.7;
-    margin-bottom: 30px;
-}
-
-
-/* ==============================
-   BUTTONS
-============================== */
-
-.hero-buttons {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-    flex-wrap: wrap;
-}
-
-.button {
-    display: inline-block;
-    padding: 13px 25px;
-    background: #fff;
-    color: #1304f1;
-    text-decoration: none;
-    font-weight: 600;
-    border-radius: 6px;
-    transition: 0.3s;
-}
-
-.button:hover {
-    background: #ddd;
-}
-
-.secondary-button {
-    background: transparent;
-    color: #fff;
-    border: 1px solid #fff;
-}
-
-.secondary-button:hover {
-    background: #fff;
-    color: #1708f1;
-}
-
-
-/* ==============================
-   SERVICES
-============================== */
-
-.services-preview {
-    padding: 70px 0;
-    background: #fff;
-    text-align: center;
-}
-
-.services-preview h2,
-.why-us h2 {
-    font-size: 32px;
-    color: #1f06ff;
-    margin-bottom: 40px;
-}
-
-.cards {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 25px;
-}
-
-.card {
-    padding: 30px;
-    background: #f5f5f5;
-    border-radius: 8px;
-    text-align: center;
-    transition: 0.3s;
-}
-
-.card:hover {
-    transform: translateY(-5px);
-    box-shadow: #1304f1;
-}
-
-.card-icon {
-    font-size: 42px;
-    margin-bottom: 15px;
-}
-
-.card h3 {
-    font-size: 21px;
-    color: #1900ff;
-    margin-bottom: 12px;
-}
-
-.card p {
-    color: #666;
-    line-height: 1.7;
-    margin-bottom: 20px;
-}
-
-.card a {
-    color: #0e40e4;
-    text-decoration: none;
-    font-weight: 600;
-}
-
-.card a:hover {
-    text-decoration: underline;
-}
-
-
-/* ==============================
-   WHY CHOOSE US
-============================== */
-
-.why-us {
-    padding: 70px 0;
-    background: #f5f5f5;
-    text-align: center;
-}
-
-.benefits {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 25px;
-}
-
-.benefit {
-    background: #fff;
-    padding: 30px;
-    border-radius: 8px;
-}
-
-.benefit-icon {
-    width: 45px;
-    height: 45px;
-    margin: 0 auto 15px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: #0145ff;
-    color: #fff;
-    border-radius: 50%;
-    font-size: 22px;
-    font-weight: bold;
-}
-
-.benefit h3 {
-    color: #0d11e2;
-    font-size: 21px;
-    margin-bottom: 12px;
-}
-
-.benefit p {
-    color: #666;
-    line-height: 1.7;
-}
-
-
-/* ==============================
-   CALL TO ACTION
-============================== */
-
-.cta {
-    padding: 70px 20px;
-    background: #3801ff;
-    text-align: center;
-}
-
-.cta h2 {
-    color: #fff;
-    font-size: 32px;
-    margin-bottom: 15px;
-}
-
-.cta p {
-    max-width: 700px;
-    margin: 0 auto 25px;
-    color: #ddd;
-    line-height: 1.7;
-}
-
-
-/* ==============================
-   MOBILE RESPONSIVE
-============================== */
-
-@media (max-width: 768px) {
-
-    .hero {
-        min-height: 450px;
-    }
-
-    .hero h1 {
-        font-size: 36px;
-    }
-
-    .hero p {
-        font-size: 16px;
-    }
-
-    .cards,
-    .benefits {
-        grid-template-columns: 1fr;
-    }
-
-    .services-preview,
-    .why-us,
-    .cta {
-        padding: 50px 0;
-    }
-
-    .services-preview h2,
-    .why-us h2,
-    .cta h2 {
-        font-size: 28px;
-    }
-}
-
-/* Enquiry Form Styling - Inspired by reference layout using Sisonke colors */
-
-.form-section {
-    background-color: #1E3A8A; /* Sisonke Primary Deep Blue background */
-    padding: 50px 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.form-container {
-    width: 100%;
-    max-width: 850px;
-    background-color: #0F172A; /* Dark navy card container */
-    border: 1px solid #60A5FA; /* Clean accent border */
-    border-radius: 8px;
-    padding: 45px 40px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-}
-
-.page-title h2 {
-    color: #0F172A; 
-    text-align: center;
-    font-size: 28px;
-    margin-bottom: 8px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
-
-/* Form Row layout (Label on left, colon separator, Input on right) */
-.form-group {
-    display: flex;
-    align-items: center;
-    margin-bottom: 22px;
-}
-
-.form-group label {
-    width: 180px;
-    color: #FFFFFF;
-    font-weight: 500;
-    font-size: 14px;
-    flex-shrink: 0;
-}
-
-/* Adds the colon separator matching your reference screenshot */
-.form-group label::after {
-    content: ":";
-    float: right;
-    margin-right: 15px;
-    color: #93C5FD;
-}
-
-/* Input fields taking up the rest of the row */
-.form-group input,
-.form-group select,
-.form-group textarea {
-    flex-grow: 1;
-    background-color: #1E293B; /* Darker input box background */
-    border: 1px solid #334155;
-    border-radius: 4px;
-    padding: 12px 15px;
-    color: #FFFFFF;
-    font-size: 14px;
-    transition: all 0.3s ease;
-}
-
-.form-group input::placeholder,
-.form-group textarea::placeholder {
-    color: #64748B;
-}
-
-.form-group input:focus,
-.form-group select:focus,
-.form-group textarea:focus {
-    outline: none;
-    border-color: #60A5FA;
-    background-color: #0F172A;
-    box-shadow: 0 0 0 2px rgba(96, 165, 250, 0.2);
-}
-
-.form-group textarea {
-    resize: vertical;
-}
-
-/* Small helper texts under inputs */
-.form-text {
-    display: block;
-    margin-top: 5px;
-    font-size: 12px;
-    color: #94A3B8;
-    margin-left: 180px; /* Aligned with inputs */
-}
-
-/* Checkbox alignment */
-.form-group-checkbox {
-    margin: 25px 0;
-    color: #CBD5E1;
-    font-size: 13px;
-    padding-left: 180px; /* Aligns with inputs */
-}
-
-.form-group-checkbox label {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    cursor: pointer;
-}
-
-.form-group-checkbox input[type="checkbox"] {
-    accent-color: #2563EB;
-    width: 16px;
-    height: 16px;
-}
-
-/* Submit Button styled to match your brand */
-.submit-btn {
-    display: block;
-    width: 200px;
-    margin-left: auto;
-    background-color: #2563EB; 
-    color: #FFFFFF;
-    border: none;
-    border-radius: 4px;
-    padding: 12px 20px;
-    font-size: 15px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
-
-.submit-btn:hover {
-    background-color: #1D4ED8;
-}
-
-/* Mobile Responsiveness: Stacks fields neatly on smaller screens */
-@media (max-width: 768px) {
-    .form-group {
-        flex-direction: column;
-        align-items: stretch;
-    }
-
-    .form-group label {
-        width: 100%;
-        margin-bottom: 6px;
-    }
-
-    .form-group label::after {
-        display: none; /* Hide colon on mobile view */
-    }
-
-    .form-text,
-    .form-group-checkbox {
-        padding-left: 0;
-    }
-
-    .submit-btn {
-        width: 100%;
     }
 }
