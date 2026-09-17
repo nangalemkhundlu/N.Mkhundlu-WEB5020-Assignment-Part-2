@@ -2,7 +2,6 @@
    1. ROOT VARIABLES & GLOBAL DESIGN SYSTEM
    ========================================== */
 :root {
-    /* --- Original brand colors: UNCHANGED --- */
     --primary: #2563EB;
     --primary-dark: #1E3A8A;
     --accent: #0F172A;
@@ -13,38 +12,10 @@
     --border: #E2E8F0;
     --nav-bg: #0B0F19;
     --danger: #E50914;
-
-    /* --- Derived tones: same colors, just given opacity so they can blend
-           into gradients/shadows/glows instead of sitting as flat, isolated
-           blocks. This is what makes the palette feel like one family. --- */
-    --primary-10: rgba(37, 99, 235, 0.10);
-    --primary-20: rgba(37, 99, 235, 0.20);
-    --primary-35: rgba(37, 99, 235, 0.35);
-    --danger-15: rgba(229, 9, 20, 0.15);
-    --danger-40: rgba(229, 9, 20, 0.40);
-    --accent-glow: rgba(96, 165, 250, 0.35);
-
-    /* --- Shared tokens: consistent radius/shadow/spacing/motion scale so
-           every card, button and panel reads as the same design system --- */
-    --radius-sm: 6px;
-    --radius-md: 10px;
-    --radius-lg: 16px;
-    --shadow-sm: 0 4px 6px -1px rgba(15, 23, 42, 0.05), 0 2px 4px -1px rgba(15, 23, 42, 0.03);
-    --shadow-md: 0 10px 20px -3px rgba(15, 23, 42, 0.10), 0 4px 8px -2px rgba(15, 23, 42, 0.06);
-    --shadow-lg: 0 25px 50px rgba(15, 23, 42, 0.35);
-    --shadow-glow: 0 0 0 3px var(--accent-glow);
-    --ease: cubic-bezier(0.22, 1, 0.36, 1);
-    --dur-fast: 0.2s;
-    --dur: 0.35s;
-    --dur-slow: 0.6s;
 }
 
 * {
     box-sizing: border-box;
-}
-
-html {
-    scroll-behavior: smooth;
 }
 
 body {
@@ -57,11 +28,6 @@ body {
     -webkit-font-smoothing: antialiased;
 }
 
-::selection {
-    background: var(--primary-35);
-    color: #FFFFFF;
-}
-
 .container {
     width: min(90%, 1200px);
     margin-inline: auto;
@@ -69,25 +35,7 @@ body {
 
 a {
     text-decoration: none;
-    transition: color var(--dur-fast) var(--ease);
-}
-
-/* Respect users who don't want motion — everything below still works,
-   it just stops moving. */
-@media (prefers-reduced-motion: reduce) {
-    *, *::before, *::after {
-        animation-duration: 0.001ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.001ms !important;
-        scroll-behavior: auto !important;
-    }
-}
-
-/* Shared entrance motion, reused across hero/cards/benefits so the whole
-   page feels choreographed rather than each section animating on its own. */
-@keyframes riseIn {
-    from { opacity: 0; transform: translateY(18px); }
-    to   { opacity: 1; transform: translateY(0); }
+    transition: color 0.25s ease;
 }
 
 /* ==========================================
@@ -95,12 +43,7 @@ a {
    ========================================== */
 .site-header {
     background-color: var(--nav-bg);
-    /* The red no longer sits as a flat, unrelated stripe — it fades into
-       the same blue used everywhere else, so it reads as "brand accent"
-       rather than "different website's color". */
-    border-bottom: 3px solid transparent;
-    border-image: linear-gradient(90deg, var(--danger) 0%, var(--primary) 55%, var(--primary-dark) 100%) 1;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+    border-bottom: 4px solid var(--danger);
     position: sticky;
     top: 0;
     z-index: 1000;
@@ -136,30 +79,16 @@ a {
 }
 
 .site-nav a {
-    position: relative;
     color: #F1F5F9;
     text-decoration: none;
     font-size: 15px;
     font-weight: 600;
-    padding: 4px 0;
+    padding: 0;
     background: transparent !important;
     border: none !important;
     box-shadow: none !important;
     transform: none !important;
-    transition: color var(--dur-fast) var(--ease);
-}
-
-/* Underline grows from the center on hover — small touch of life on an
-   otherwise static nav. */
-.site-nav a::after {
-    content: '';
-    position: absolute;
-    left: 50%;
-    bottom: -2px;
-    width: 0;
-    height: 2px;
-    background: var(--danger);
-    transition: width var(--dur) var(--ease), left var(--dur) var(--ease);
+    transition: color 0.3s ease;
 }
 
 .site-nav a:hover {
@@ -167,25 +96,14 @@ a {
     background: transparent !important;
 }
 
-.site-nav a:hover::after {
-    width: 100%;
-    left: 0;
-}
-
 .site-nav a:focus-visible {
     outline: 2px solid #FFFFFF;
     outline-offset: 4px;
-    border-radius: 2px;
 }
 
 .site-nav a[aria-current="page"] {
     color: var(--danger);
     background: transparent !important;
-}
-
-.site-nav a[aria-current="page"]::after {
-    width: 100%;
-    left: 0;
 }
 
 /* ==========================================
@@ -197,19 +115,6 @@ a {
     color: #FFFFFF;
     text-align: center;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    position: relative;
-    overflow: hidden;
-}
-
-/* Soft glow ties the "danger" red into the dark hero gradient at low
-   opacity, instead of the two colors only ever meeting at a hard edge. */
-.page-header::before {
-    content: '';
-    position: absolute;
-    inset: -20% -10% auto -10%;
-    height: 260px;
-    background: radial-gradient(60% 100% at 50% 0%, var(--danger-15), transparent 70%);
-    pointer-events: none;
 }
 
 .eyebrow {
@@ -219,23 +124,18 @@ a {
     text-transform: uppercase;
     letter-spacing: 1.5px;
     font-size: 14px;
-    position: relative;
 }
 
 .page-header h1 {
     margin: 0 0 1rem;
     font-size: clamp(2rem, 5vw, 3rem);
     color: #FFFFFF;
-    position: relative;
-    animation: riseIn var(--dur-slow) var(--ease) both;
 }
 
 .page-introduction {
     max-width: 700px;
     margin: 0 auto;
     color: #94A3B8;
-    position: relative;
-    animation: riseIn var(--dur-slow) var(--ease) 0.1s both;
 }
 
 .hero {
@@ -246,22 +146,10 @@ a {
     text-align: center;
     background: linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.85)), #111827;
     padding: 80px 20px;
-    position: relative;
-    overflow: hidden;
-}
-
-.hero::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(45% 65% at 85% 15%, var(--primary-20), transparent 60%),
-                radial-gradient(35% 50% at 10% 90%, var(--danger-15), transparent 65%);
-    pointer-events: none;
 }
 
 .hero-content {
     max-width: 800px;
-    position: relative;
 }
 
 .hero h1 {
@@ -270,7 +158,6 @@ a {
     line-height: 1.2;
     margin-bottom: 20px;
     font-weight: 800;
-    animation: riseIn var(--dur-slow) var(--ease) both;
 }
 
 .hero p {
@@ -278,7 +165,6 @@ a {
     font-size: 18px;
     line-height: 1.7;
     margin-bottom: 35px;
-    animation: riseIn var(--dur-slow) var(--ease) 0.12s both;
 }
 
 /* ==========================================
@@ -289,54 +175,24 @@ a {
     justify-content: center;
     gap: 15px;
     flex-wrap: wrap;
-    animation: riseIn var(--dur-slow) var(--ease) 0.24s both;
 }
 
 .button {
     display: inline-block;
-    position: relative;
     padding: 14px 28px;
     background: var(--primary);
     color: #FFFFFF;
     text-decoration: none;
     font-weight: 600;
-    border-radius: var(--radius-sm);
-    overflow: hidden;
-    transition: transform var(--dur-fast) var(--ease), box-shadow var(--dur-fast) var(--ease), background var(--dur-fast) var(--ease);
-    box-shadow: 0 4px 12px var(--primary-35);
-}
-
-/* Subtle diagonal sheen sweeps across on hover — a common "premium"
-   micro-interaction that reads as polish rather than a gimmick. */
-.button::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -60%;
-    width: 40%;
-    height: 100%;
-    background: linear-gradient(115deg, transparent, rgba(255, 255, 255, 0.35), transparent);
-    transform: skewX(-20deg);
-    transition: left var(--dur-slow) var(--ease);
-}
-
-.button:hover::before {
-    left: 120%;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
 }
 
 .button:hover {
     background: #1D4ED8;
     transform: translateY(-2px);
-    box-shadow: 0 6px 16px var(--primary-35);
-}
-
-.button:active {
-    transform: translateY(0);
-}
-
-.button:focus-visible {
-    outline: none;
-    box-shadow: var(--shadow-glow), 0 4px 12px var(--primary-35);
+    box-shadow: 0 6px 16px rgba(37, 99, 235, 0.35);
 }
 
 .secondary-button {
@@ -371,22 +227,6 @@ a {
     text-align: center;
     font-size: 32px;
     font-weight: 700;
-    position: relative;
-    padding-bottom: 14px;
-}
-
-/* Small centered accent underline ties every section title back to the
-   same blue-to-red brand line used in the header. */
-.section-heading::after {
-    content: '';
-    position: absolute;
-    left: 50%;
-    bottom: 0;
-    transform: translateX(-50%);
-    width: 60px;
-    height: 3px;
-    border-radius: 2px;
-    background: linear-gradient(90deg, var(--primary), var(--danger));
 }
 
 .services-grid,
@@ -405,26 +245,16 @@ a {
 .benefit {
     background-color: var(--surface);
     border: 1px solid var(--border);
-    border-radius: var(--radius-md);
+    border-radius: 10px;
     overflow: hidden;
-    box-shadow: var(--shadow-sm);
-    transition: transform var(--dur) var(--ease), box-shadow var(--dur) var(--ease), border-color var(--dur) var(--ease);
-    animation: riseIn var(--dur-slow) var(--ease) both;
-    position: relative;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
-
-/* Stagger the entrance of grid children a little so the section feels
-   like it's assembling itself rather than popping in all at once. */
-.services-grid > *:nth-child(1), .cards > *:nth-child(1), .benefits > *:nth-child(1) { animation-delay: 0s; }
-.services-grid > *:nth-child(2), .cards > *:nth-child(2), .benefits > *:nth-child(2) { animation-delay: 0.08s; }
-.services-grid > *:nth-child(3), .cards > *:nth-child(3), .benefits > *:nth-child(3) { animation-delay: 0.16s; }
-.services-grid > *:nth-child(4), .cards > *:nth-child(4), .benefits > *:nth-child(4) { animation-delay: 0.24s; }
 
 .service-card:hover,
 .card:hover {
-    transform: translateY(-6px);
-    box-shadow: var(--shadow-md);
-    border-color: var(--primary-20);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px -3px rgba(0, 0, 0, 0.08);
 }
 
 .service-image {
@@ -469,17 +299,11 @@ a {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    background: var(--primary);
     color: #FFFFFF;
     border-radius: 50%;
     font-size: 20px;
     font-weight: bold;
-    box-shadow: 0 6px 14px var(--primary-35);
-    transition: transform var(--dur) var(--ease);
-}
-
-.benefit:hover .benefit-icon {
-    transform: scale(1.08) rotate(-4deg);
 }
 
 .why-us {
@@ -532,18 +356,11 @@ a {
     padding: 35px;
     margin-bottom: 25px;
     border-left: 5px solid var(--primary);
-    border-radius: var(--radius-md);
+    border-radius: 8px;
     border-top: 1px solid var(--border);
     border-right: 1px solid var(--border);
     border-bottom: 1px solid var(--border);
-    box-shadow: var(--shadow-sm);
-    transition: transform var(--dur) var(--ease), box-shadow var(--dur) var(--ease), border-left-color var(--dur) var(--ease);
-}
-
-.about-card:hover {
-    transform: translateX(4px);
-    box-shadow: var(--shadow-md);
-    border-left-color: var(--danger);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
 }
 
 .about-card h2 {
@@ -578,18 +395,6 @@ a {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    position: relative;
-    overflow: hidden;
-}
-
-.contact-section::before,
-.form-section::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(40% 60% at 90% 10%, var(--primary-20), transparent 60%),
-                radial-gradient(30% 40% at 5% 95%, var(--danger-15), transparent 65%);
-    pointer-events: none;
 }
 
 .contact-container,
@@ -598,15 +403,12 @@ a {
     max-width: 1200px;
     background-color: #0F172A;
     border: 1px solid rgba(96, 165, 250, 0.2);
-    border-top: 4px solid transparent;
-    border-image: linear-gradient(90deg, var(--primary), var(--danger)) 1;
-    border-radius: var(--radius-lg);
+    border-top: 4px solid var(--primary);
+    border-radius: 12px;
     padding: 50px;
-    box-shadow: var(--shadow-lg);
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
     box-sizing: border-box;
-    position: relative;
-    z-index: 1;
-
+    
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 40px;
@@ -642,7 +444,7 @@ a {
 .contact-info {
     background: #1E293B;
     padding: 35px;
-    border-radius: var(--radius-md);
+    border-radius: 10px;
     border-left: 5px solid var(--primary);
     color: #FFFFFF !important;
     height: 100%;
@@ -650,12 +452,6 @@ a {
     border-top: 1px solid rgba(255, 255, 255, 0.05);
     border-right: 1px solid rgba(255, 255, 255, 0.05);
     border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-    transition: border-left-color var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
-}
-
-.contact-info:hover {
-    border-left-color: var(--danger);
-    box-shadow: var(--shadow-md);
 }
 
 .contact-info p,
@@ -686,11 +482,6 @@ a {
     padding: 12px 0;
     border-bottom: 1px solid #334155;
     color: #CBD5E1 !important;
-    transition: padding-left var(--dur-fast) var(--ease);
-}
-
-.contact-details li:hover {
-    padding-left: 6px;
 }
 
 .contact-details li:last-child {
@@ -710,7 +501,7 @@ a {
 .contact-form {
     background: #1E293B;
     padding: 35px;
-    border-radius: var(--radius-md);
+    border-radius: 10px;
     border-left: 5px solid #60A5FA;
     box-shadow: none;
     width: 100%;
@@ -718,11 +509,6 @@ a {
     border-top: 1px solid rgba(255, 255, 255, 0.05);
     border-right: 1px solid rgba(255, 255, 255, 0.05);
     border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-    transition: box-shadow var(--dur) var(--ease);
-}
-
-.contact-form:hover {
-    box-shadow: var(--shadow-md);
 }
 
 .form-group {
@@ -750,13 +536,13 @@ a {
     width: 100%;
     background-color: #0F172A;
     border: 1px solid #334155;
-    border-radius: var(--radius-sm);
+    border-radius: 6px;
     padding: 12px 16px;
     color: #FFFFFF;
     font-size: 14px;
     font-family: inherit;
     box-sizing: border-box;
-    transition: all var(--dur-fast) var(--ease);
+    transition: all 0.3s ease;
 }
 
 .form-group input::placeholder,
@@ -808,87 +594,27 @@ a {
 .contact-form button,
 .submit-btn {
     display: block;
-    position: relative;
-    overflow: hidden;
     width: 100%;
     margin-top: 15px;
     padding: 14px 24px;
     border: none;
-    border-radius: var(--radius-sm);
+    border-radius: 6px;
     background: var(--primary);
     color: #FFFFFF;
     font-size: 15px;
     font-weight: 600;
     cursor: pointer;
-    transition: all var(--dur-fast) var(--ease);
+    transition: all 0.3s ease;
     text-transform: uppercase;
     letter-spacing: 1px;
-    box-shadow: 0 4px 12px var(--primary-35);
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
 }
 
 .contact-form button:hover,
 .submit-btn:hover {
     background: #1D4ED8;
     transform: translateY(-2px);
-    box-shadow: 0 6px 18px var(--primary-35);
-}
-
-/* ==========================================
-   7B. MAP / LOCATION EMBED — FIX FOR OVERSIZED
-   EMPTY SPACE NEXT TO SMALL MAP
-   ==========================================
-   Your screenshot shows a map pinned to its default
-   intrinsic size while its wrapper stretches full width,
-   leaving a large blank gap. These rules force any map
-   embed (iframe, Google Maps embed, or a div-based map
-   library) to fill its container using a responsive
-   aspect ratio. Adjust the selectors to match your actual
-   HTML class/id if different — but this covers the most
-   common patterns.
-*/
-.map-section,
-.location-section,
-.find-us {
-    padding: 60px 0 80px;
-    background-color: var(--background);
-}
-
-.map-container,
-.map-wrapper,
-.map-embed,
-.location-map {
-    position: relative;
-    width: 100%;
-    aspect-ratio: 16 / 7;
-    border-radius: var(--radius-md);
-    overflow: hidden;
-    box-shadow: var(--shadow-sm);
-    border: 1px solid var(--border);
-}
-
-.map-container iframe,
-.map-wrapper iframe,
-.map-embed iframe,
-.location-map iframe,
-.map-container img,
-.map-wrapper img,
-section iframe[src*="maps"],
-iframe[src*="google.com/maps"] {
-    position: absolute;
-    inset: 0;
-    width: 100% !important;
-    height: 100% !important;
-    border: 0;
-    display: block;
-}
-
-@media (max-width: 768px) {
-    .map-container,
-    .map-wrapper,
-    .map-embed,
-    .location-map {
-        aspect-ratio: 4 / 5;
-    }
+    box-shadow: 0 6px 18px rgba(37, 99, 235, 0.4);
 }
 
 /* ==========================================
@@ -899,17 +625,6 @@ iframe[src*="google.com/maps"] {
     background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
     text-align: center;
     color: #FFFFFF;
-    position: relative;
-    overflow: hidden;
-}
-
-.cta::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(50% 80% at 100% 0%, var(--danger-40), transparent 60%);
-    opacity: 0.25;
-    pointer-events: none;
 }
 
 .cta h2 {
@@ -917,7 +632,6 @@ iframe[src*="google.com/maps"] {
     font-size: 32px;
     margin-bottom: 15px;
     font-weight: 700;
-    position: relative;
 }
 
 .cta p {
@@ -925,11 +639,6 @@ iframe[src*="google.com/maps"] {
     margin: 0 auto 30px;
     color: #E2E8F0;
     line-height: 1.7;
-    position: relative;
-}
-
-.cta .button {
-    position: relative;
 }
 
 /* ==========================================
@@ -939,8 +648,7 @@ iframe[src*="google.com/maps"] {
     background: linear-gradient(135deg, #0F172A 0%, #1E3A8A 100%);
     color: #FFFFFF;
     padding: 70px 20px 25px;
-    border-top: 3px solid transparent;
-    border-image: linear-gradient(90deg, var(--primary-dark), var(--primary), var(--danger)) 1;
+    border-top: 4px solid var(--primary);
     box-shadow: inset 0 10px 20px rgba(0, 0, 0, 0.2);
     text-align: left;
 }
@@ -977,12 +685,6 @@ iframe[src*="google.com/maps"] {
     height: 2px;
     background-color: #60A5FA;
     border-radius: 2px;
-    transition: width var(--dur) var(--ease);
-}
-
-.footer-section:hover h3::after {
-    width: 55px;
-    background-color: var(--danger);
 }
 
 .footer-section p {
@@ -1012,7 +714,7 @@ iframe[src*="google.com/maps"] {
     color: #CBD5E1;
     text-decoration: none;
     font-size: 14px;
-    transition: color var(--dur-fast) var(--ease), padding-left var(--dur-fast) var(--ease);
+    transition: color 0.3s ease;
 }
 
 .footer-links a:hover {
@@ -1042,7 +744,7 @@ iframe[src*="google.com/maps"] {
     .services-grid {
         grid-template-columns: repeat(2, 1fr);
     }
-
+    
     .cards, .benefits {
         grid-template-columns: repeat(2, 1fr);
     }
